@@ -26,7 +26,39 @@
    
       public void updateGame(int row, int column)
       {
-      
+         int stones = board[row][column];
+         board[row][column] = 0;
+         int rowIndex = row;
+         int colIndex = column;
+         for (int i = 0; i < stones; i++)
+         {
+				//Assumed going clockwise.
+            if (colIndex == 1)
+            {
+               if (rowIndex - 1 < 0)
+               {
+                  colIndex = 0;
+               }
+               else
+               {
+                  rowIndex--;
+               }
+            }
+				else
+				{
+               if (rowIndex + 1 > board[0].length - 1)
+               {
+                  colIndex = 1;
+               }
+               else
+               {
+                  rowIndex++;
+               }
+				}
+         
+            board[rowIndex][colIndex]++;
+            stones--;
+         }
       }
    
       public boolean isGameOver()
