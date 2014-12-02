@@ -61,7 +61,7 @@
          }
       }
    
-      public boolean isGameOver()
+      public int isGameOver()
       {
          int top = 0;
          int bottom = 0;
@@ -72,11 +72,15 @@
             bottom = bottom + board[1][i];
          }
       
-         if (top == 0 || bottom == 0)
+         if (top == 0)
          {
-            return true;
+            return 1; //Player one wins
          }
-         return false;
+			if (bottom == 0)
+			{
+				return 2; //Player two wins
+			}
+         return -1; //Game now over
       }
    
       public String toString()
@@ -86,7 +90,7 @@
          {
             result = result + " " + board[0][i];
          }
-         result = result + "/r/n";
+         result = result + "\r\n";
          for (int i = 0; i < length; i++)
          {
             result = result + " " + board[1][i];
