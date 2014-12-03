@@ -100,7 +100,7 @@
                {
                   while (enteredNum <= 0)
                   {
-                     System.out.print("Move: ");
+                     System.out.print("Player 1 Move: ");
                      enteredNum = scan.nextInt();
                      System.out.println();
                   }
@@ -108,7 +108,7 @@
                else
                {
                   enteredNum = playerOne.getMove(game, plyOne);
-                  System.out.println("Move: " + enteredNum);
+                  System.out.println("Playe 1 Move: " + enteredNum);
                }
                game.updateGame(0,enteredNum-1); 
                playerOneTurn = false;
@@ -119,7 +119,7 @@
                {
                   while (enteredNum <= 0)
                   {
-                     System.out.print("Move: ");
+                     System.out.print("Player 2 Move: ");
                      enteredNum = scan.nextInt();
                      System.out.println();
                   }
@@ -127,7 +127,7 @@
                else
                {
                   enteredNum = playerTwo.getMove(game, plyTwo);
-                  System.out.println("Move: " + enteredNum);
+                  System.out.println("Player 2 Move: " + enteredNum);
                }
                game.updateGame(1,enteredNum-1); 
                playerOneTurn = true;

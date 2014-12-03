@@ -101,11 +101,11 @@ public class GameBoard
    
       if (top == 0)
       {
-         return 2; //Player one wins
+         return 2; //Player 2 wins
       }
       if (bottom == 0)
       {
-         return 1; //Player two wins
+         return 1; //Player 1 wins
       }
       return -1; //Game not over
    }
