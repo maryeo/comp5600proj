@@ -44,7 +44,7 @@
       private int alphaBetaSearch(GameBoard state, int ply)
       {
          int v = Integer.MIN_VALUE;
-         int a = -1;
+         int a = 0;
          int alpha = Integer.MIN_VALUE;
          int beta = Integer.MAX_VALUE;
          Hashtable<GameBoard, Integer> hash = new Hashtable<GameBoard, Integer>();
@@ -54,6 +54,7 @@
          {
             GameBoard newState = result(state, action);
             int newV = min(newState, alpha, beta, ply, count, hash);
+				System.out.println(action);
             if (newV > v)
             {
                v = newV;
@@ -165,8 +166,9 @@
 						action1 = moves.get(j);
 						moves.set(j, temp);
 					}
-					moves.add(action1);
 				}
+				moves.add(action1);
+				System.out.println(action1);
 			}
       
          return moves;
