@@ -5,6 +5,11 @@
    {
       int playerNum;
       boolean andOr;
+      
+      public Agent()
+      {
+         //default constructor
+      }
    
       public Agent(int playerNumber, boolean useAndOr)
       {

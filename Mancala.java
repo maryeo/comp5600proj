@@ -8,11 +8,11 @@
          int columns = 0;
          int stones = 0;
          int enteredNum = 0;
-         Agent playerOne = null;
+         Agent playerOne = new Agent();
          boolean human1 = false;
          boolean human2 = false;
          int plyOne = 0;
-         Agent playerTwo = null;
+         Agent playerTwo = new Agent();
          int plyTwo = 0;
          GameBoard game;
          boolean playerOneTurn = true;
@@ -108,7 +108,8 @@
                else
                {
                   enteredNum = playerOne.getMove(game, plyOne);
-                  System.out.println("Playe 1 Move: " + enteredNum);
+                  System.out.println(enteredNum +"\n");
+                  System.out.println("Player 1 Move: " + enteredNum);
                }
                game.updateGame(0,enteredNum-1); 
                playerOneTurn = false;
@@ -127,6 +128,7 @@
                else
                {
                   enteredNum = playerTwo.getMove(game, plyTwo);
+                  System.out.println(enteredNum + "\n");
                   System.out.println("Player 2 Move: " + enteredNum);
                }
                game.updateGame(1,enteredNum-1); 
