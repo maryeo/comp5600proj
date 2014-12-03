@@ -9,6 +9,8 @@
          int stones = 0;
          int enteredNum = 0;
          Agent playerOne = null;
+         boolean human1 = false;
+         boolean human2 = false;
          int plyOne = 0;
          Agent playerTwo = null;
          int plyTwo = 0;
@@ -39,6 +41,10 @@
             System.out.print("Enter choice: ");
             enteredNum = scan.nextInt();
          }
+         if(enteredNum == 1)
+         {
+            human1 = true;
+         }  
          if (enteredNum == 2)
          {
             playerOne = new Agent(1, true);
@@ -64,6 +70,10 @@
             System.out.print("Enter choice: ");
             enteredNum = scan.nextInt();
          }
+         if(enteredNum == 1)
+         {
+            human2 = true;
+         }
          if (enteredNum == 2)
          {
             playerOne = new Agent(2, true);
@@ -86,7 +96,7 @@
          	
             if (playerOneTurn)
             {
-               if (playerOne.equals(null))
+               if (human1)
                {
                   while (enteredNum <= 0)
                   {
@@ -104,7 +114,7 @@
             }
             else
             {
-               if (playerTwo.equals(null))
+               if (human2)
                {
                   while (enteredNum <= 0)
                   {
