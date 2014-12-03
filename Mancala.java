@@ -110,6 +110,7 @@
                   enteredNum = playerOne.getMove(game, plyOne);
                   System.out.println("Move: " + enteredNum);
                }
+               game.updateGame(0,enteredNum-1); 
                playerOneTurn = false;
             }
             else
@@ -128,6 +129,7 @@
                   enteredNum = playerTwo.getMove(game, plyTwo);
                   System.out.println("Move: " + enteredNum);
                }
+               game.updateGame(1,enteredNum-1); 
                playerOneTurn = true;
             }
             enteredNum = 0;

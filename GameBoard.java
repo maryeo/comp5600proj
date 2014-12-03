@@ -30,7 +30,7 @@ public class GameBoard
       board[row][column] = 0;
       int rowIndex = row;
       int colIndex = column;
-      for (int i = 0; i < stones; i++)
+      /*for (int i = 0; i < stones; i++)
       {
       	//Assumed going clockwise.
          if (colIndex == 1)
@@ -54,10 +54,38 @@ public class GameBoard
             {
                rowIndex++;
             }
+         }*/
+         //some errors in update (also that was counterclockwise not clockwise)
+         //
+      for(; stones > 0; stones--)
+      {
+         if(rowIndex == 0)
+         {
+               
+            if(colIndex != length-1)                  
+            {
+               colIndex ++;
+               board[rowIndex][colIndex]++;
+            }
+            else
+            {
+               rowIndex = 1;
+               board[rowIndex][colIndex]++;
+            }
          }
-      
-         board[rowIndex][colIndex]++;
-         stones--;
+         else if(rowIndex == 1)
+         {
+            if(colIndex != 0)                  
+            {
+               colIndex --;
+               board[rowIndex][colIndex]++;
+            }
+            else
+            {
+               rowIndex = 0;
+               board[rowIndex][colIndex]++;
+            }
+         } 
       }
    }
 
@@ -65,7 +93,6 @@ public class GameBoard
    {
       int top = 0;
       int bottom = 0;
-   
       for (int i = 0; i < length; i++)
       {
          top = top + board[0][i];
