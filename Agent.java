@@ -138,13 +138,36 @@
    
       private GameBoard result(GameBoard state, int action)
       {
-         state.updateGame(playerNum, action);
+         state.updateGame(playerNum - 1, action);
          return state;
       }
    
       private ArrayList<Integer> orderMoves(GameBoard state, boolean agentsMove)
       {
          ArrayList<Integer> moves = new ArrayList<Integer>();
+			ArrayList<Integer> actions = actions(state);
+			for (int i = 0; i < actions.size(); i++)
+			{
+				int action1 = actions.get(i);
+				GameBoard newState = result(state, actions.get(i));
+				
+				for (int j = 0; i < moves.size(); i++)
+				{
+					if (agentsMove && H1(newState) >= H1(result(state, moves.get(j))))
+					{
+						int temp = action1;
+						action1 = moves.get(j);
+						moves.set(j, temp);
+					}
+					if (!agentsMove && H1(newState) <= H1(result(state, moves.get(j))))
+					{
+						int temp = action1;
+						action1 = moves.get(j);
+						moves.set(j, temp);
+					}
+					moves.add(action1);
+				}
+			}
       
          return moves;
       }
@@ -154,9 +177,10 @@
          ArrayList<Integer> moves = new ArrayList<Integer>();
          for (int i = 0; i < state.size(); i++)
          {
-            if (state.get(playerNum, i) != 0)
+            if (state.get(playerNum - 1, i) != 0)
             {
                moves.add(i);
+					System.out.print(i);
             }
          }
          return moves;
