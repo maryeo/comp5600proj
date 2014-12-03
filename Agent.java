@@ -72,7 +72,7 @@
          Integer v = hash.get(state);
          if (v == null)
          {
-            if (state.isGameOver()|| count >= ply)
+            if ((state.isGameOver()== -1)|| count >= ply)
             {
                return H1(state);
             }
@@ -104,7 +104,7 @@
          Integer v = hash.get(state);
          if (v == null)
          {
-            if (state.isGameOver()|| count >= ply)
+            if ((state.isGameOver()== -1)|| count >= ply))
             {
                return H1(state);
             }
