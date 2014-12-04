@@ -13,6 +13,11 @@ public class GameBoard
          board[1][i] = stones;
       }
    }
+   
+   public GameBoard(GameBoard game)
+   {
+      this.board = game.board;
+   }
 
    public int size()
    {

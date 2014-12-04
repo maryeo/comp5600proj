@@ -108,8 +108,10 @@ public class Mancala
             }
             else
             {
-               enteredNum = playerOne.getMove(game, plyOne);
-               System.out.println(game.toString());
+               GameBoard temp = new GameBoard(game);
+               enteredNum = playerOne.getMove(temp, plyOne);
+               System.out.println("Player 1 Move: " + enteredNum);
+               game.updateGame(0,enteredNum);
             }
           
             playerOneTurn = false;
@@ -128,8 +130,10 @@ public class Mancala
             }
             else
             {
-               enteredNum = playerTwo.getMove(game, plyTwo);
+               GameBoard temp = new GameBoard(game);
+               enteredNum = playerTwo.getMove(temp, plyTwo);
                System.out.println("Player 2 Move: " + enteredNum);
+               game.updateGame(0,enteredNum);
             }
             playerOneTurn = true;
          }
