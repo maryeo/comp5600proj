@@ -109,11 +109,10 @@ public class Mancala
             else
             {
                enteredNum = playerOne.getMove(game, plyOne);
-               System.out.println(enteredNum +"\n");
                System.out.println("Player 1 Move: " + enteredNum);
-               game.updateGame(0,enteredNum);
+               System.out.println(game.toString());
             }
-             
+          
             playerOneTurn = false;
          }
          else
@@ -133,14 +132,11 @@ public class Mancala
                enteredNum = playerTwo.getMove(game, plyTwo);
                System.out.println(enteredNum + "\n");
                System.out.println("Player 2 Move: " + enteredNum);
-               game.updateGame(1,enteredNum);
             }
-             
             playerOneTurn = true;
          }
          enteredNum = 0;
       }
-      
       System.out.println("Player " + game.isGameOver() + " won!");
    }
 }
