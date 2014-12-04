@@ -138,14 +138,14 @@ public class Mancala
                   enteredNum = scan.nextInt();
                   System.out.println();
                }
-               game.updateGame(0,enteredNum-1);
+               game.updateGame(1,enteredNum-1);
             }
             else
             {
                GameBoard temp = new GameBoard(game);
                enteredNum = playerTwo.getMove(temp, plyTwo);
                System.out.println("Player 2 Move: " + enteredNum);
-               game.updateGame(0,enteredNum);
+               game.updateGame(1,enteredNum);
             }
             playerOneTurn = true;
          }
