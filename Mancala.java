@@ -109,7 +109,6 @@ public class Mancala
             else
             {
                enteredNum = playerOne.getMove(game, plyOne);
-               System.out.println("Player 1 Move: " + enteredNum);
                System.out.println(game.toString());
             }
           
@@ -130,7 +129,6 @@ public class Mancala
             else
             {
                enteredNum = playerTwo.getMove(game, plyTwo);
-               System.out.println(enteredNum + "\n");
                System.out.println("Player 2 Move: " + enteredNum);
             }
             playerOneTurn = true;
