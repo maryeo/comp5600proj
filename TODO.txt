@@ -1,4 +1,9 @@
 
+--When results call updateGame to see what the result would be, it alters the array, so the game updates
+	the board after every tested move. I don't remember how to make a copy so that it doesn't alter th
+	original?...
+
+
 
 --For some reason, getMove always returns 0
 

@@ -148,7 +148,7 @@
 			for (int i = 0; i < actions.size(); i++)
 			{
 				int action1 = actions.get(i);
-				GameBoard newState = result(state, actions.get(i));
+				GameBoard newState = result(state, actions.get(i)); ///HERE.
 				
 				for (int j = 0; i < moves.size(); i++)
 				{

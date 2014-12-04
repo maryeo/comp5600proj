@@ -17,7 +17,9 @@ public class GameBoard
    //Cunstructor used to make a copy
    public GameBoard(GameBoard game)
    {
-      this.board = game.board;
+      //this.board = game.board;
+      this.length = game.length;
+      this.board = game.board.clone();  
    }
    //size of the gameboard
    public int size()
