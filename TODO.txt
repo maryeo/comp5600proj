@@ -1,0 +1,15 @@
+
+
+--For some reason, getMove always returns 0
+
+--Player 2 update move might be tring to move pieces from row 1, ,insufficient testing to be 
+	certain of this
+
+--Need to have choose between 'run' and 'step'
+
+--Need to implement the AND/OR stuff
+
+--Add comments to code
+
+--(When code finished) Gather data from games for report
+
