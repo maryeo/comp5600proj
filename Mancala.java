@@ -17,21 +17,28 @@ public class Mancala
       GameBoard game;
       boolean playerOneTurn = true;
       Scanner scan = new Scanner(System.in);
-   	
+      
+      //Get user input for game parameters 
+      
+      //Number of squares ont he board for each player     	
       while (columns <= 0 || columns > 10)
       {
          System.out.print("Squares per player: ");
          columns = scan.nextInt();
          System.out.println();
       }
+      
+      //number of pebbles starting in each square
       while (stones <= 0)
       {
          System.out.print("Initial number of stones per square: ");
          stones = scan.nextInt();
          System.out.println();
       }
+      //create a game with the above user parameters
       game = new GameBoard(columns, stones);
    	
+      //select player type for Player 1
       while (enteredNum <= 0 || enteredNum > 3)
       {
          System.out.println("Player one options: ");
@@ -41,15 +48,15 @@ public class Mancala
          System.out.print("Enter choice: ");
          enteredNum = scan.nextInt();
       }
-      if(enteredNum == 1)
+      if(enteredNum == 1)//human player
       {
          human1 = true;
       }  
-      if (enteredNum == 2)
+      if (enteredNum == 2)//AndOrSearch
       {
          playerOne = new Agent(1, true);
       }
-      else if (enteredNum == 3)
+      else if (enteredNum == 3)//AlphaBeta
       {
          playerOne = new Agent(1, false);
          while (plyOne <= 0)
@@ -60,7 +67,7 @@ public class Mancala
          }
       }
       enteredNum = 0;
-   	
+   	//Select player type  for Player 2
       while (enteredNum <= 0 || enteredNum > 3)
       {
          System.out.println("Player two options: ");
@@ -90,12 +97,15 @@ public class Mancala
       }
       enteredNum = 0;
    	
+      //Begin Gameplay
       while (game.isGameOver() == -1)
       {
          System.out.println(game.toString());
       	
+         //Player 1
          if (playerOneTurn)
          {
+            //Get Move from human player
             if (human1)
             {
                while (enteredNum <= 0)
@@ -106,6 +116,7 @@ public class Mancala
                }
                game.updateGame(0,enteredNum-1);
             }
+            //Get move from computer agent   
             else
             {
                GameBoard temp = new GameBoard(game);
@@ -116,6 +127,7 @@ public class Mancala
           
             playerOneTurn = false;
          }
+         //Player 2 moves
          else
          {
             if (human2)
@@ -139,6 +151,7 @@ public class Mancala
          }
          enteredNum = 0;
       }
+      //Print win message
       System.out.println("Player " + game.isGameOver() + " won!");
    }
 }

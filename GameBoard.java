@@ -3,6 +3,7 @@ public class GameBoard
    private int[][] board;
    int length;
 
+   
    public GameBoard(int columns, int stones)
    {
       length = columns;
@@ -13,22 +14,22 @@ public class GameBoard
          board[1][i] = stones;
       }
    }
-   
+   //Cunstructor used to make a copy
    public GameBoard(GameBoard game)
    {
       this.board = game.board;
    }
-
+   //size of the gameboard
    public int size()
    {
       return length;
    }
-
+   
    public int get(int row, int column)
    {
       return board[row][column];
    }
-
+   //Takes a move and updates the board to reflect new pebble positions
    public void updateGame(int row, int column)
    {
       int stones = board[row][column];
@@ -66,7 +67,7 @@ public class GameBoard
          } 
       }
    }
-
+   //check for final state
    public int isGameOver()
    {
       int top = 0;
