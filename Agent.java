@@ -54,7 +54,6 @@
          {
             GameBoard newState = result(state, action);
             int newV = min(newState, alpha, beta, ply, count, hash);
-				System.out.println(action);
             if (newV > v)
             {
                v = newV;
@@ -69,7 +68,6 @@
                alpha = v;
             }
          }
-      
          return a;
       }
    
@@ -168,7 +166,6 @@
 					}
 				}
 				moves.add(action1);
-				System.out.println(action1);
 			}
       
          return moves;
@@ -182,7 +179,6 @@
             if (state.get(playerNum - 1, i) != 0)
             {
                moves.add(i);
-					System.out.print(i);
             }
          }
          return moves;
