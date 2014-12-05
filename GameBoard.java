@@ -1,7 +1,7 @@
 public class GameBoard
 {
    private int[][] board;
-   int length;
+   private int length;
 
    
    public GameBoard(int columns, int stones)
@@ -17,10 +17,15 @@ public class GameBoard
    //Cunstructor used to make a copy
    public GameBoard(GameBoard game)
    {
-      //this.board = game.board;
-      this.length = game.length;
-      this.board = game.board.clone();  
+      length = game.size();
+      board = new int[2][length];
+		for (int i = 0; i < length; i++)
+      {
+         board[0][i] = game.get(0, i);
+         board[1][i] = game.get(0, i);
+      }
    }
+	
    //size of the gameboard
    public int size()
    {
