@@ -275,12 +275,10 @@
             if (agentsMove && state.get(playerNum - 1, i) != 0)
             {
                moves.add(i);
-					System.out.println("NUM: " + playerNum + "stone: " + state.get(playerNum - 1, i));
             }
 				else if(!agentsMove && state.get(playerNum % 2, i) != 0)
 				{
 					moves.add(i);
-					System.out.println("NUM: " + playerNum + "stone: " + state.get(playerNum % 2, i));
 				}
          }
          return moves;
