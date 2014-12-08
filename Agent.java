@@ -43,46 +43,79 @@
       private int andOrSearch(GameBoard state, int ply)
       {
 			//Instructions say don't use the move ordering for this algorithm!
-         int action = orSearch(state, new Hashtable<GameBoard, Integer>(), ply, 0).get(0);
-         return action;
+			int maxAction = -1;
+			int maxUtil = -1;
+			for (int action : actions(state))
+			{
+				int result = andSearch(result(state, action), new Hashtable<GameBoard, Integer>(), ply, 1);
+				if(result > maxUtil)
+				{
+					maxUtil = result;
+					maxAction = action;
+				}
+			}
+			if(maxAction == -1)
+			{
+				ArrayList<Integer> actions = actions(state);
+				Random rand = new Random();
+				maxAction = rand.nextInt(actions.size());
+			}
+         return maxAction;
       }
 		
 		//Don't need to keep track of plan since 
-		private ArrayList<Integer> orSearch(GameBoard state, Hashtable<GameBoard, Integer> path, int ply, int count)
+		private int orSearch(GameBoard state, Hashtable<GameBoard, Integer> path, int ply, int count)
 		{
-			ArrayList<Integer> plan = new ArrayList<Integer>();
 			if(state.isGameOver() == playerNum)
 			{
-				plan.add(Integer.MAX_VALUE);
-				return plan;
+				return Integer.MAX_VALUE;
 			}
-			if(path.containsKey(state))
+			if(path.containsKey(state) || state.isGameOver() != -1)
 			{
-				return null;
+				return -1;
 			}
 			if(count >= ply)
 			{
-				plan.add(H1(state));
-				return plan;
+				return H1(state);
 			}
+			int maxUtil = -1;
 			for(int action : actions(state))
 			{
 				path.put(state, action);
-				plan = andSearch(result(state, action), path, ply, count + 1);
-				if(plan != null)
+				int plan = andSearch(result(state, action), path, ply, count + 1);
+				//If it wasn't a total failure, will go into this statemnt. Picks highest H1.
+				if(plan > maxUtil)
 				{
-					return plan;
+					maxUtil = plan;
 				}
 			}
-			return null;
+			return maxUtil;
 		} 
 		
-		private ArrayList<Integer> andSearch(GameBoard state, Hashtable<GameBoard, Integer> path, int ply, int count)
+		private int andSearch(GameBoard state, Hashtable<GameBoard, Integer> path, int ply, int count)
 		{
-			if(state.isGameOver() == playerNum)
+			if(count >= ply)
 			{
+				return H1(state);
 			}
-			return null;
+			int minUtil = Integer.MAX_VALUE;
+			for(int action : actions(state))
+			{
+				path.put(state, action);
+				 int plan = orSearch(result(state, action), path, ply, count + 1);
+				if(plan == -1)
+				{
+					return -1;
+				}
+				else
+				{
+					if(plan < minUtil)
+					{
+						minUtil = plan;
+					}
+				}
+			}
+			return minUtil;
 		}
    
       private int alphaBetaSearch(GameBoard state, int ply)
