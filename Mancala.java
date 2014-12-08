@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Mancala
 {
-   public static void main(String args[])
+   public static void main(String args[]) throws IOException
    {
       int columns = 0;
       int stones = 0;
@@ -15,6 +15,7 @@ public class Mancala
       Agent playerTwo = new Agent();
       int plyTwo = 0;
       GameBoard game;
+      boolean step = false;
       boolean playerOneTurn = true;
       Scanner scan = new Scanner(System.in);
       
@@ -95,12 +96,19 @@ public class Mancala
             System.out.println();
          }
       }
+      System.out.println("Game mode:?\n1-Run\n2-step");
+      enteredNum =scan.nextInt();
+      if(enteredNum == 2)
+      {
+         step = true;
+       }
       enteredNum = 0;
    	
       //Begin Gameplay
+      System.out.println(game.toString());
       while (game.isGameOver() == -1)
       {
-         System.out.println(game.toString());
+         
       	
          //Player 1
          if (playerOneTurn)
@@ -115,6 +123,7 @@ public class Mancala
                   System.out.println();
                }
                game.updateGame(0,enteredNum-1);
+               System.out.println(game.toString());
             }
             //Get move from computer agent   
             else
@@ -123,6 +132,12 @@ public class Mancala
                enteredNum = playerOne.getMove(temp, plyOne);
                System.out.println("Player 1 Move: " + enteredNum);
                game.updateGame(0,enteredNum);
+               System.out.println(game.toString());
+               if(step)
+               {
+                  System.out.println("Press enter to continue");
+                  System.in.read();
+                }
             }
           
             playerOneTurn = false;
@@ -139,6 +154,7 @@ public class Mancala
                   System.out.println();
                }
                game.updateGame(1,enteredNum-1);
+               System.out.println(game.toString());
             }
             else
             {
@@ -146,6 +162,12 @@ public class Mancala
                enteredNum = playerTwo.getMove(temp, plyTwo);
                System.out.println("Player 2 Move: " + enteredNum);
                game.updateGame(1,enteredNum);
+               System.out.println(game.toString());
+               if(step)
+               {
+                  System.out.println("Press enter to continue");
+                  System.in.read();
+                }
             }
             playerOneTurn = true;
          }
