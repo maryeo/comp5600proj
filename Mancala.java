@@ -56,6 +56,12 @@ public class Mancala
       if (enteredNum == 2)//AndOrSearch
       {
          playerOne = new Agent(1, true);
+			while (plyOne <= 0)
+         {
+            System.out.print("Ply: ");
+            plyOne = scan.nextInt();
+            System.out.println();
+         }
       }
       else if (enteredNum == 3)//AlphaBeta
       {
@@ -85,6 +91,12 @@ public class Mancala
       if (enteredNum == 2)
       {
          playerOne = new Agent(2, true);
+			while (plyTwo <= 0)
+         {
+            System.out.print("Ply: ");
+            plyTwo = scan.nextInt();
+            System.out.println();
+         }
       }
       else if (enteredNum == 3)
       {
@@ -97,7 +109,7 @@ public class Mancala
          }
       }
       System.out.println("Game mode:?\n1-Run\n2-step");
-      enteredNum =scan.nextInt();
+      enteredNum = scan.nextInt();
       if(enteredNum == 2)
       {
          step = true;

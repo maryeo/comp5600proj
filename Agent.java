@@ -4,13 +4,15 @@
 
    public class Agent
    {
-      int playerNum;
+      final int playerNum;
       boolean andOr;
 		Hashtable<GameBoard, Integer> prevMoves = new Hashtable<GameBoard, Integer>();
       
       public Agent()
       {
          //default constructor
+			playerNum = 1;
+			andOr = false;
       }
    
       public Agent(int playerNumber, boolean useAndOr)
@@ -45,9 +47,10 @@
 			//Instructions say don't use the move ordering for this algorithm!
 			int maxAction = -1;
 			int maxUtil = -1;
-			for (int action : actions(state))
+			ArrayList<Integer> actions = actions(state, true);
+			for (int action : actions)
 			{
-				int result = andSearch(result(state, action), new Hashtable<GameBoard, Integer>(), ply, 1);
+				int result = andSearch(result(state, action, true), new Hashtable<GameBoard, Integer>(), ply, 1);
 				if(result > maxUtil)
 				{
 					maxUtil = result;
@@ -56,7 +59,6 @@
 			}
 			if(maxAction == -1)
 			{
-				ArrayList<Integer> actions = actions(state);
 				Random rand = new Random();
 				maxAction = rand.nextInt(actions.size());
 			}
@@ -79,10 +81,10 @@
 				return H1(state);
 			}
 			int maxUtil = -1;
-			for(int action : actions(state))
+			for(int action : actions(state, true))
 			{
 				path.put(state, action);
-				int plan = andSearch(result(state, action), path, ply, count + 1);
+				int plan = andSearch(result(state, action, true), path, ply, count + 1);
 				//If it wasn't a total failure, will go into this statemnt. Picks highest H1.
 				if(plan > maxUtil)
 				{
@@ -99,10 +101,10 @@
 				return H1(state);
 			}
 			int minUtil = Integer.MAX_VALUE;
-			for(int action : actions(state))
+			for(int action : actions(state, false))
 			{
 				path.put(state, action);
-				 int plan = orSearch(result(state, action), path, ply, count + 1);
+				 int plan = orSearch(result(state, action, false), path, ply, count + 1);
 				if(plan == -1)
 				{
 					return -1;
@@ -123,7 +125,7 @@
 		   int a = 0;
 			if(prevMoves.containsKey(state))
 			{
-				ArrayList<Integer> actions = actions(state);
+				ArrayList<Integer> actions = actions(state, true);
 				Random rand = new Random();
 				a = rand.nextInt(actions.size());
 			}
@@ -137,7 +139,7 @@
          	int count = 0;
          	for (int action : orderMoves(state, true))
          	{
-            	GameBoard newState = result(state, action);
+            	GameBoard newState = result(state, action, true);
             	int newV = min(newState, alpha, beta, ply, count, hash);
             	if (newV > v)
             	{
@@ -170,7 +172,7 @@
             v = Integer.MAX_VALUE;
             for (int action : orderMoves(state, false))
             {
-               GameBoard newState = result(state, action);
+               GameBoard newState = result(state, action, false);
                int newV = max(newState, alpha, beta, ply, count + 1, hash);
                if (newV < v)
                {
@@ -202,7 +204,7 @@
             v = Integer.MIN_VALUE;
             for (int action : orderMoves(state, true))
             {
-               GameBoard newState = result(state, action);
+               GameBoard newState = result(state, action, true);
                int newV = min(newState, alpha, beta, ply, count + 1, hash);
                if (newV > v)
                {
@@ -222,30 +224,37 @@
          return v;
       }
    
-      private GameBoard result(GameBoard state, int action)
+      private GameBoard result(GameBoard state, int action, boolean agentsMove)
       {
-         state.updateGame(playerNum - 1, action);
-         return state;
+			if(agentsMove)
+			{
+         	state.updateGame((playerNum - 1) % 2, action);
+         }
+			else
+			{
+				state.updateGame(playerNum % 2, action);
+			}
+			return state;
       }
    
       private ArrayList<Integer> orderMoves(GameBoard state, boolean agentsMove)
       {
          ArrayList<Integer> moves = new ArrayList<Integer>();
-			ArrayList<Integer> actions = actions(state);
+			ArrayList<Integer> actions = actions(state, agentsMove);
 			for (int i = 0; i < actions.size(); i++)
 			{
 				int action1 = actions.get(i);
-				GameBoard newState = result(state, actions.get(i)); ///HERE.
+				GameBoard newState = result(state, actions.get(i), agentsMove); ///HERE.
 				
 				for (int j = 0; i < moves.size(); i++)
 				{
-					if (agentsMove && H1(newState) >= H1(result(state, moves.get(j))))
+					if (agentsMove && H1(newState) >= H1(result(state, moves.get(j), agentsMove)))
 					{
 						int temp = action1;
 						action1 = moves.get(j);
 						moves.set(j, temp);
 					}
-					if (!agentsMove && H1(newState) <= H1(result(state, moves.get(j))))
+					if (!agentsMove && H1(newState) <= H1(result(state, moves.get(j), agentsMove)))
 					{
 						int temp = action1;
 						action1 = moves.get(j);
@@ -258,15 +267,21 @@
          return moves;
       }
       
-      private ArrayList<Integer> actions(GameBoard state)
+      private ArrayList<Integer> actions(GameBoard state, boolean agentsMove)
       {
          ArrayList<Integer> moves = new ArrayList<Integer>();
          for (int i = 0; i < state.size(); i++)
          {
-            if (state.get(playerNum - 1, i) != 0)
+            if (agentsMove && state.get(playerNum - 1, i) != 0)
             {
                moves.add(i);
+					System.out.println("NUM: " + playerNum + "stone: " + state.get(playerNum - 1, i));
             }
+				else if(!agentsMove && state.get(playerNum % 2, i) != 0)
+				{
+					moves.add(i);
+					System.out.println("NUM: " + playerNum + "stone: " + state.get(playerNum % 2, i));
+				}
          }
          return moves;
       }
@@ -274,7 +289,7 @@
       private int H1(GameBoard state)
       {
          int result = 0;
-         int index = (playerNum) % 2;
+         int index = playerNum % 2;
          for (int i = 0; i < state.size(); i++)
          {
             result = result + state.get(index, i);
