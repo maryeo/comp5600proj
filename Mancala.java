@@ -142,8 +142,9 @@ public class Mancala
             {
                GameBoard temp = new GameBoard(game);
                enteredNum = playerOne.getMove(temp, plyOne);
+					enteredNum++;
                System.out.println("Player 1 Move: " + enteredNum);
-               game.updateGame(0,enteredNum);
+               game.updateGame(0,enteredNum - 1);
                System.out.println(game.toString());
                if(step)
                {
@@ -172,8 +173,9 @@ public class Mancala
             {
                GameBoard temp = new GameBoard(game);
                enteredNum = playerTwo.getMove(temp, plyTwo);
+					enteredNum++;
                System.out.println("Player 2 Move: " + enteredNum);
-               game.updateGame(1,enteredNum);
+               game.updateGame(1,enteredNum - 1);
                System.out.println(game.toString());
                if(step)
                {

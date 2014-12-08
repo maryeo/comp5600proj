@@ -128,6 +128,7 @@
 				ArrayList<Integer> actions = actions(state, true);
 				Random rand = new Random();
 				a = rand.nextInt(actions.size());
+				System.out.println("THIS HAPPENED");
 			}
 			else
 			{

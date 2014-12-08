@@ -22,7 +22,7 @@ public class GameBoard
 		for (int i = 0; i < length; i++)
       {
          board[0][i] = game.get(0, i);
-         board[1][i] = game.get(0, i);
+         board[1][i] = game.get(1, i);
       }
    }
 	
